@@ -63,15 +63,18 @@ export class ItemStore {
   }
 
   update(id: number, patch: ItemPatch): Item | undefined {
-    const item = this.items.find((candidate) => candidate.id === id);
-    if (!item) return undefined;
+    const index = this.items.findIndex((candidate) => candidate.id === id);
+    if (index === -1) return undefined;
+    const current = this.items[index]!;
     const updated: Item = {
-      ...item,
-      ...patch,
       id,
-      slug: patch.name ? slugify(patch.name) : item.slug,
-      tags: patch.tags ?? item.tags,
+      name: patch.name ?? current.name,
+      slug: patch.name ? slugify(patch.name) : current.slug,
+      price: patch.price ?? current.price,
+      quantity: patch.quantity ?? current.quantity,
+      tags: patch.tags ?? current.tags,
     };
+    this.items[index] = updated;
     return updated;
   }
 
