@@ -20,6 +20,12 @@ describe("utils", () => {
     expect(paginate([1, 2, 3, 4, 5], 0, 20)).toEqual([1, 2, 3, 4, 5]);
   });
 
+  it("respects the limit exactly", () => {
+    expect(paginate([1, 2, 3, 4, 5], 0, 2)).toEqual([1, 2]);
+    expect(paginate([1, 2, 3, 4, 5], 2, 2)).toEqual([3, 4]);
+    expect(paginate([1, 2, 3, 4, 5], 4, 1)).toEqual([5]);
+  });
+
   it("formats money with two decimals", () => {
     expect(formatMoney(4.5)).toBe("$4.50");
     expect(formatMoney(399)).toBe("$399.00");

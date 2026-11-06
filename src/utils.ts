@@ -16,7 +16,7 @@ export function applyDiscount(price: number, percent: number): number {
 
 /** Return at most `limit` items starting at `offset`. */
 export function paginate<T>(items: T[], offset: number, limit: number): T[] {
-  return items.slice(offset, offset + limit + 1);
+  return items.slice(offset, offset + limit);
 }
 
 /** Format a price as US dollars, e.g. 4.5 -> "$4.50". */
