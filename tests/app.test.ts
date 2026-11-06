@@ -59,6 +59,16 @@ describe("inventory api", () => {
     expect(after.status).toBe(404);
   });
 
+  it("returns 404 for deleting an unknown item without data loss", async () => {
+    const app = createApp();
+    const before = await request(app).get("/items");
+    const del = await request(app).delete("/items/999");
+    expect(del.status).toBe(404);
+    const after = await request(app).get("/items");
+    expect(after.body.items).toHaveLength(before.body.items.length);
+    expect(after.body.items.some((i: { id: number }) => i.id === 5)).toBe(true);
+  });
+
   it("returns the full price without a discount", async () => {
     const res = await request(createApp()).get("/items/3/price");
     expect(res.status).toBe(200);
