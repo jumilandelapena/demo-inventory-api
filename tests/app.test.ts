@@ -65,4 +65,13 @@ describe("inventory api", () => {
     expect(res.body.price).toBe(4.5);
     expect(res.body.formatted).toBe("$4.50");
   });
+
+  it("persists updates", async () => {
+    const app = createApp();
+    const put = await request(app).put("/items/3").send({ quantity: 5 });
+    expect(put.status).toBe(200);
+    expect(put.body.quantity).toBe(5);
+    const get = await request(app).get("/items/3");
+    expect(get.body.quantity).toBe(5);
+  });
 });
