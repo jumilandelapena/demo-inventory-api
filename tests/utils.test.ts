@@ -11,6 +11,12 @@ describe("utils", () => {
     expect(applyDiscount(100, 0)).toBe(100);
   });
 
+  it("applies a percentage discount", () => {
+    expect(applyDiscount(100, 10)).toBe(90);
+    expect(applyDiscount(50, 25)).toBe(37.5);
+    expect(applyDiscount(4.5, 20)).toBe(3.6);
+  });
+
   it("rejects discounts outside 0-100", () => {
     expect(() => applyDiscount(100, 101)).toThrow(RangeError);
     expect(() => applyDiscount(100, -5)).toThrow(RangeError);
