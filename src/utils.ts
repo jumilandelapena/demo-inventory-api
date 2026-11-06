@@ -5,7 +5,7 @@ export function round2(value: number): number {
 
 /** URL-safe slug: lower-case letters, digits and single hyphens, e.g. "Desk Lamp" -> "desk-lamp". */
 export function slugify(name: string): string {
-  return name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 }
 
 /** Apply a percentage discount (0-100) to a price and round to cents. */
