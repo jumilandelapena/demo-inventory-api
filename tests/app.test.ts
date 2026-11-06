@@ -23,6 +23,12 @@ describe("inventory api", () => {
     expect(res.body.items.map((i: { name: string }) => i.name)).toEqual(["Desk Lamp", "Standing Desk"]);
   });
 
+  it("filters case-insensitively", async () => {
+    const res = await request(createApp()).get("/items").query({ q: "desk" });
+    expect(res.status).toBe(200);
+    expect(res.body.items.map((i: { name: string }) => i.name)).toEqual(["Desk Lamp", "Standing Desk"]);
+  });
+
   it("returns one item by id", async () => {
     const res = await request(createApp()).get("/items/1");
     expect(res.status).toBe(200);
