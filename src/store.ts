@@ -46,7 +46,8 @@ export class ItemStore {
 
   /** Case-insensitive substring match on the item name. */
   search(query: string): Item[] {
-    return this.items.filter((item) => item.name.includes(query));
+    const needle = query.toLowerCase();
+    return this.items.filter((item) => item.name.toLowerCase().includes(needle));
   }
 
   create(input: NewItem): Item {
