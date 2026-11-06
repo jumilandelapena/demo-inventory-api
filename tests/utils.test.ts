@@ -7,6 +7,13 @@ describe("utils", () => {
     expect(slugify("USB-C Cable")).toBe("usb-c-cable");
   });
 
+  it("strips leading and trailing hyphens from slugs", () => {
+    expect(slugify("Hello World!")).toBe("hello-world");
+    expect(slugify("Mr. Coffee")).toBe("mr-coffee");
+    expect(slugify("  Spaced  ")).toBe("spaced");
+    expect(slugify("USB-C Cable")).toBe("usb-c-cable");
+  });
+
   it("applies a zero discount", () => {
     expect(applyDiscount(100, 0)).toBe(100);
   });
