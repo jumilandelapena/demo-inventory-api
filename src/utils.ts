@@ -11,7 +11,7 @@ export function slugify(name: string): string {
 /** Apply a percentage discount (0-100) to a price and round to cents. */
 export function applyDiscount(price: number, percent: number): number {
   if (percent < 0 || percent > 100) throw new RangeError("percent must be between 0 and 100");
-  return round2(price - percent);
+  return round2(price * (1 - percent / 100));
 }
 
 /** Return at most `limit` items starting at `offset`. */
